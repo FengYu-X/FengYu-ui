@@ -7,6 +7,7 @@ local AnimTab = Window:Tab("〖动画】")
 local actionTab = Window:Tab("〖FE动作】")
 local animationTab = Window:Tab("〖动作包整合】")
 local OtherTab = Window:Tab("〖其他动作】")
+local wthTab = Window:Tab("〖滚球】")
 local kickTab = Window:Tab("〖另外】")
 
 local Exclusive_Emotes = {}
@@ -1393,6 +1394,167 @@ OtherTab:Toggle("VIP (旧音频)", false, function(state)
             end
         end
     end
+end)
+
+--滚球
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local TeleportService = game:GetService("TeleportService")
+local StarterGui = game:GetService("StarterGui")
+local Camera = Workspace.CurrentCamera
+local queue_on_teleport = queue_on_teleport or nil
+
+local player = Players.LocalPlayer
+local speed = 30
+local jumpHeight = 25
+local distanceCheck = 0.3
+local ballSize = 5
+local executeOnTp = true
+
+local tc = nil
+local jumprqst = nil
+
+local function disableHamsterBall()
+    if tc then
+        tc:Disconnect()
+        tc = nil
+    end
+    if jumprqst then
+        jumprqst:Disconnect()
+        jumprqst = nil
+    end
+
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local rootPart = character.HumanoidRootPart
+        rootPart.Anchored = false
+        rootPart.CanCollide = true
+        rootPart.Shape = Enum.PartType.Block
+        if rootPart:FindFirstChild("OriginalSize") then
+            rootPart.Size = rootPart.OriginalSize.Value
+        end
+        if character:FindFirstChild("Humanoid") then
+            character.Humanoid.PlatformStand = false
+            Camera.CameraSubject = character.Humanoid
+        end
+    end
+    Workspace.Gravity = 100
+end
+
+local function enableHamsterBall()
+    if tc ~= nil then
+        return
+    end
+
+    local character = player.Character
+    if not character or not character:FindFirstChild("HumanoidRootPart") then
+        return
+    end
+
+    for _, part in ipairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+
+    local rootPart = character.HumanoidRootPart
+    rootPart.Shape = Enum.PartType.Ball
+    rootPart.Size = Vector3.new(ballSize, ballSize, ballSize)
+    if not rootPart:FindFirstChild("OriginalSize") then
+        local origSize = Instance.new("Vector3Value")
+        origSize.Name = "OriginalSize"
+        origSize.Value = rootPart.Size
+        origSize.Parent = rootPart
+    end
+
+    local humanoid = character:WaitForChild("Humanoid")
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+    raycastParams.FilterDescendantsInstances = { character }
+
+    tc = RunService.RenderStepped:Connect(function(deltaTime)
+        rootPart.CanCollide = true
+        humanoid.PlatformStand = true
+        if not UserInputService:GetFocusedTextBox() then
+            if UserInputService:IsKeyDown("W") then
+                rootPart.RotVelocity = rootPart.RotVelocity - Camera.CFrame.RightVector * deltaTime * speed
+            end
+            if UserInputService:IsKeyDown("A") then
+                rootPart.RotVelocity = rootPart.RotVelocity - Camera.CFrame.LookVector * deltaTime * speed
+            end
+            if UserInputService:IsKeyDown("S") then
+                rootPart.RotVelocity = rootPart.RotVelocity + Camera.CFrame.RightVector * deltaTime * speed
+            end
+            if UserInputService:IsKeyDown("D") then
+                rootPart.RotVelocity = rootPart.RotVelocity + Camera.CFrame.LookVector * deltaTime * speed
+            end
+        end
+    end)
+
+    jumprqst = UserInputService.JumpRequest:Connect(function()
+        if Workspace:Raycast(rootPart.Position, Vector3.new(0, -(rootPart.Size.Y / 2 + distanceCheck), 0), raycastParams) then
+            rootPart.Velocity = rootPart.Velocity + Vector3.new(0, jumpHeight, 0)
+        end
+    end)
+
+    Camera.CameraSubject = rootPart
+
+    humanoid.Died:Connect(function()
+        disableHamsterBall()
+    end)
+end
+
+local function brake()
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") and character.HumanoidRootPart.Shape == Enum.PartType.Ball then
+        character.HumanoidRootPart.RotVelocity = Vector3.new(0, 0, 0)
+    end
+end
+
+local function toggleFreeze()
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") and character.HumanoidRootPart.Shape == Enum.PartType.Ball then
+        local root = character.HumanoidRootPart
+        root.Anchored = not root.Anchored
+    end
+end
+
+wthTab:Button("启用", function()
+    enableHamsterBall()
+end)
+
+wthTab:Button("禁用", function()
+    disableHamsterBall()
+end)
+
+wthTab:Slider("球体大小", 5, 15, 5, function(value)
+    ballSize = value
+    local character = player.Character
+    if character and character:FindFirstChild("HumanoidRootPart") and character.HumanoidRootPart.Shape == Enum.PartType.Ball then
+        character.HumanoidRootPart.Size = Vector3.new(ballSize, ballSize, ballSize)
+    end
+end)
+
+wthTab:Button("刹车", function()
+    brake()
+end)
+
+wthTab:Button("冻结/解冻", function()
+    toggleFreeze()
+end)
+
+wthTab:Slider("速度倍率", 0, 100, 25, function(value)
+    speed = value
+end)
+
+wthTab:Slider("跳跃高度", 0, 100, 25, function(value)
+    jumpHeight = value
+end)
+
+wthTab:Slider("环境重力", 0, 196, 100, function(value)
+    Workspace.Gravity = value
 end)
 
 --UI的设置
