@@ -724,10 +724,20 @@ local animationPacks = {
         walk = "rbxassetid://81193817424328",
         run = "rbxassetid://132653655520682"
     },
+    ["约翰.多3月18日动作包"] = {
+        idle = "rbxassetid://105880087711722",
+        walk = "rbxassetid://88665566861294",
+        run = "rbxassetid://88665566861294"
+    },
     ["酷小孩动画包"] = {
         idle = "rbxassetid://18885903667",
         walk = "rbxassetid://18885906143",
         run = "rbxassetid://96571077893813"
+    },
+    ["里程四酷小孩动画包"] = {
+        idle = "rbxassetid://136752484165169",
+        walk = "rbxassetid://124582615971845",
+        run = "rbxassetid://113259297401193"
     },
     ["诺利动画包"] = {
         idle = "rbxassetid://83465205704188",
@@ -744,10 +754,110 @@ local animationPacks = {
         walk = "rbxassetid://18885906143",
         run = "rbxassetid://96571077893813"
     },
+    ["蓝小孩（新）动画包"] = {
+        idle = "rbxassetid://96013907659083",
+        walk = "rbxassetid://111019416323211",
+        run = "rbxassetid://101711406381367"
+    },
+    ["斩首者动画包"] = {
+        idle = "rbxassetid://116050994905421",
+        walk = "rbxassetid://93622022596108",
+        run = "rbxassetid://93054787145505"
+    },
     ["里程四斩首者动画包"] = {
         idle = "rbxassetid://111915677103210",
         walk = "rbxassetid://92337314320765",
         run = "rbxassetid://86125526846131"
+    },
+    ["追踪者动画包"] = {
+        idle = "rbxassetid://94895464960972",
+        walk = "rbxassetid://100206079439305",
+        run = "rbxassetid://138660433982140"
+    },
+    ["黑手党动作包"] = {
+        idle = "rbxassetid://96029349600709",
+        walk = "rbxassetid://122086286372651",
+        run = "rbxassetid://73833636394121"
+    },
+    ["旁白动画包"] = {
+        idle = "rbxassetid://129891807903845",
+        walk = "rbxassetid://114152086302685",
+        run = "rbxassetid://97759042686395"
+    },
+    ["吸血鬼动画包"] = {
+        idle = "rbxassetid://70639889347646",
+        walk = "rbxassetid://125580704385106",
+        run = "rbxassetid://82983377044738"
+    },
+    ["鬼畜动画包"] = {
+        idle = "rbxassetid://138798332857092",
+        walk = "rbxassetid://125121915550057",
+        run = "rbxassetid://119868176210393"
+    },
+    ["电视时间动画包"] = {
+        idle = "rbxassetid://85728609580979",
+        walk = "rbxassetid://95769893872782",
+        run = "rbxassetid://95769893872782"
+    },
+    ["1x1x1x1动画包"] = {
+        idle = "rbxassetid://138754221537146",
+        walk = "rbxassetid://109130982296927",
+        run = "rbxassetid://106485518413331"
+    },
+    ["深渊之眼动画包"] = {
+        idle = "rbxassetid://86304511408042",
+        walk = "rbxassetid://92610215258030",
+        run = "rbxassetid://129455514345450"
+    },
+    ["管理员动画包"] = {
+        idle = "rbxassetid://119473916907837",
+        walk = "rbxassetid://89706191899405",
+        run = "rbxassetid://124250212996049"
+    },
+    ["烈焰石动画包"] = {
+        idle = "rbxassetid://106883884364210",
+        walk = "rbxassetid://131203472525014",
+        run = "rbxassetid://93106765808091"
+    },
+    ["诺利动画包"] = {
+        idle = "rbxassetid://83465205704188",
+        walk = "rbxassetid://109700476007435",
+        run = "rbxassetid://117451341682452"
+    },
+    ["杜塞卡尔动画包"] = {
+        idle = "rbxassetid://107756518054855",
+        walk = "rbxassetid://102812745115149",
+        run = "rbxassetid://125869734469543"
+    },
+    ["桑乔动画包"] = {
+        idle = "rbxassetid://134912704311964",
+        walk = "rbxassetid://95213748170889",
+        run = "rbxassetid://75409814098993"
+    },
+    ["苏库娜动画包"] = {
+        idle = "rbxassetid://115268929362938",
+        walk = "rbxassetid://123678890237669",
+        run = "rbxassetid://132086389849889"
+    },
+    ["厄尔金动画包"] = {
+        idle = "rbxassetid://93727662665079",
+        walk = "rbxassetid://97625643261790",
+        run = "rbxassetid://119357938208454"
+    },
+    ["魔术师动画包"] = {
+        idle = "rbxassetid://88012681536088",
+        walk = "rbxassetid://92645737884601",
+        run = "rbxassetid://72285218671060"
+    },
+    ["白南瓜动画包"] = {
+        idle = "rbxassetid://129258407299450",
+        walk = "rbxassetid://120452519884275",
+        run = "rbxassetid://73353742411211"
+    },
+    ["暴食动画包"] = {
+        idle = "rbxassetid://137256991715697",
+        walk = "rbxassetid://131591857576708",
+        run = "rbxassetid://90961401774639"
     }
 }
 
